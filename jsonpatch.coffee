@@ -61,7 +61,7 @@
         if typeof a isnt 'object' or typeof b isnt 'object' then return false
         # Assume equality for cyclic structures. The algorithm for detecting cyclic
         # structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
-        length = stack.length
+        length = stack.length;
         while length--
             # Linear search. Performance is inversely proportional to the number of
             # unique nested structures.
@@ -142,7 +142,7 @@
         getObject: (obj) ->
             for loc in @path
                 if isArray obj then loc = parseInt(loc, 10)
-                if not (loc of obj)
+                if loc not of obj
                     throw new PatchConflictError('Array location out of bounds or not an instance property')
                 obj = obj[loc]
             return obj
@@ -195,11 +195,11 @@
 
         if isArray(obj)
             acc = parseInt(acc, 10)
-            if not (acc of obj)
+            if acc not of obj
                 throw new PatchConflictError("Value at #{acc} does not exist")
             obj.splice(acc, 1)
         else
-            if not (acc of obj)
+            if acc not of obj
                 throw new PatchConflictError("Value at #{acc} does not exist")
             delete obj[acc]
         return
@@ -210,11 +210,11 @@
 
         if isArray(obj)
             acc = parseInt(acc, 10)
-            if not (acc of obj)
+            if acc not of obj
                 throw new PatchConflictError("Value at #{acc} does not exist")
             obj.splice(acc, 1, value)
         else
-            if not (acc of obj)
+            if acc not of obj
                 throw new PatchConflictError("Value at #{acc} does not exist")
             obj[acc] = value
         return
@@ -236,11 +236,11 @@
 
         if isArray(obj)
             acc = parseInt(acc, 10)
-            if not (acc of obj)
+            if acc not of obj
                 throw new PatchConflictError("Value at #{acc} does not exist")
             value = obj.splice(acc, 1)[0]
         else
-            if not (acc of obj)
+            if acc not of obj
                 throw new PatchConflictError("Value at #{acc} does not exist")
             value = obj[acc]
             delete obj[acc]
